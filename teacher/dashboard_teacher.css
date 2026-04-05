@@ -1,0 +1,155 @@
+.teacher-portal-page {
+  min-height: 100vh;
+}
+
+.stars-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(1000px 520px at -10% -10%, rgba(251, 146, 60, 0.2), transparent 68%),
+    radial-gradient(980px 560px at 100% 0%, rgba(20, 184, 166, 0.18), transparent 66%),
+    linear-gradient(165deg, rgba(25, 16, 10, 0.92), rgba(21, 23, 29, 0.92), rgba(12, 32, 43, 0.92));
+}
+
+.portal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 16px clamp(16px, 4vw, 46px);
+  border-bottom: 1px solid rgba(243, 171, 98, 0.26);
+  background: rgba(33, 21, 13, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.brand-link {
+  text-decoration: none;
+  color: #fff4ea;
+  letter-spacing: 0.08em;
+}
+
+.logout-link {
+  text-decoration: none;
+  color: #ffe8cf;
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(243, 171, 98, 0.42);
+  background: rgba(68, 42, 25, 0.58);
+}
+
+.logout-link:hover {
+  color: #ffffff;
+  background: rgba(249, 115, 22, 0.24);
+}
+
+.dashboard {
+  width: min(980px, 100% - 24px);
+  margin: 26px auto;
+  padding: clamp(20px, 5vw, 36px);
+  border-radius: 22px;
+  border: 1px solid rgba(243, 171, 98, 0.25);
+  background: rgba(31, 23, 14, 0.74);
+  box-shadow: 0 22px 44px rgba(12, 8, 4, 0.44);
+  backdrop-filter: blur(8px);
+}
+
+.dashboard h2 {
+  margin: 0;
+  color: #fff6eb;
+  font-size: clamp(1.6rem, 3.8vw, 2.3rem);
+}
+
+.dashboard p {
+  margin: 10px 0 0;
+  color: #f0d6bc;
+}
+
+.portal-overview {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.overview-card {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(243, 171, 98, 0.24);
+  background: rgba(66, 44, 27, 0.46);
+}
+
+.overview-label {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #f6b877;
+}
+
+.overview-card h3 {
+  margin: 7px 0;
+  color: #fff7ef;
+  font-size: 1.04rem;
+}
+
+.overview-card p {
+  margin: 0;
+  color: #eed6bf;
+  font-size: 0.9rem;
+}
+
+.teacher-menu {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.menu-link {
+  display: block;
+  text-decoration: none;
+  color: #ffe8d0;
+  font-weight: 700;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(243, 171, 98, 0.28);
+  background: rgba(62, 40, 25, 0.62);
+}
+
+.menu-link:hover {
+  color: #ffffff;
+  background: rgba(249, 115, 22, 0.26);
+  transform: translateY(-2px);
+}
+
+footer {
+  text-align: center;
+  color: #d8b99a;
+  font-size: 0.82rem;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 760px) {
+  .portal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px;
+  }
+
+  .dashboard {
+    width: min(980px, 100% - 14px);
+    padding: 18px;
+  }
+
+  .teacher-menu {
+    grid-template-columns: 1fr;
+  }
+
+  .portal-overview {
+    grid-template-columns: 1fr;
+  }
+}

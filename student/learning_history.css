@@ -1,0 +1,851 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #0a0e27 100%);
+  color: #e0e0e0;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.stars-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+              radial-gradient(2px 2px at 60% 70%, #fff, transparent),
+              radial-gradient(1px 1px at 50% 50%, #fff, transparent),
+              radial-gradient(1px 1px at 80% 10%, #fff, transparent),
+              radial-gradient(2px 2px at 90% 60%, #fff, transparent),
+              radial-gradient(1px 1px at 33% 80%, #fff, transparent),
+              radial-gradient(1px 1px at 75% 25%, #fff, transparent);
+  background-size: 200% 200%;
+  animation: stars 60s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+@keyframes stars {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 100%; }
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  border-bottom: 2px solid rgba(102, 179, 255, 0.3);
+  background: rgba(10, 20, 45, 0.7);
+  backdrop-filter: blur(12px) saturate(180%);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 10;
+}
+
+.header-center {
+  flex: 1;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2em;
+  color: #66b3ff;
+  text-shadow: 0 0 20px rgba(102, 179, 255, 0.6);
+  margin-bottom: 0.3em;
+}
+
+.header-user {
+  font-size: 1.2em;
+  color: #4bc080;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(75, 192, 128, 0.4);
+}
+
+.header-spacer {
+  width: 100px; /* back-btnと同じ幅 */
+}
+
+.back-btn {
+  padding: 10px 20px;
+  background: rgba(102, 179, 255, 0.2);
+  border: 1px solid rgba(102, 179, 255, 0.4);
+  border-radius: 8px;
+  color: #66b3ff;
+  cursor: pointer;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: rgba(102, 179, 255, 0.3);
+  border-color: #66b3ff;
+  color: #fff;
+}
+
+header h1 {
+  font-size: 1.8em;
+  color: #66b3ff;
+  text-shadow: 0 0 15px rgba(102, 179, 255, 0.6);
+}
+
+/* フィルターセクション */
+.filter-section {
+  max-width: 1200px;
+  margin: 30px auto 20px;
+  padding: 25px;
+  background: rgba(20, 30, 60, 0.6);
+  backdrop-filter: blur(12px) saturate(180%);
+  border-radius: 15px;
+  border: 1px solid rgba(102, 179, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 5;
+}
+
+.filter-section h3 {
+  color: #66b3ff;
+  font-size: 1.3em;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(102, 179, 255, 0.5);
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.filter-btn {
+  padding: 12px 24px;
+  background: rgba(102, 179, 255, 0.1);
+  border: 2px solid rgba(102, 179, 255, 0.3);
+  border-radius: 10px;
+  color: #99ccff;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-btn:hover {
+  background: rgba(102, 179, 255, 0.2);
+  border-color: rgba(102, 179, 255, 0.5);
+  color: #66b3ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 179, 255, 0.3);
+}
+
+.filter-btn.active {
+  background: rgba(102, 179, 255, 0.3);
+  border-color: #66b3ff;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(102, 179, 255, 0.4);
+}
+
+.filter-btn.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.filter-info {
+  color: #4bc080;
+  font-size: 0.95em;
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: rgba(75, 192, 128, 0.1);
+  border-left: 3px solid #4bc080;
+  border-radius: 5px;
+}
+
+.user-info {
+  padding: 8px 16px;
+  background: rgba(179, 128, 255, 0.2);
+  border: 1px solid rgba(179, 128, 255, 0.4);
+  border-radius: 8px;
+  color: #b380ff;
+  font-weight: 500;
+}
+
+main {
+  max-width: 1400px;
+  margin: 2em auto;
+  padding: 0 2em;
+  position: relative;
+  z-index: 1;
+}
+
+/* 統計グリッド */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5em;
+  margin-bottom: 2em;
+}
+
+.stat-card {
+  background: rgba(10, 20, 45, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(102, 179, 255, 0.3);
+  border-radius: 15px;
+  padding: 1.5em;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  border-color: #66b3ff;
+  box-shadow: 0 12px 40px rgba(102, 179, 255, 0.2);
+}
+
+.stat-card h3 {
+  color: #66b3ff;
+  font-size: 1em;
+  margin-bottom: 0.5em;
+}
+
+.stat-value {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(102, 179, 255, 0.4);
+}
+
+/* グラフセクション */
+.chart-section {
+  margin-bottom: 2em;
+}
+
+.chart-card {
+  background: rgba(10, 20, 45, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(102, 179, 255, 0.3);
+  border-radius: 15px;
+  padding: 2em;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.chart-card h3 {
+  color: #66b3ff;
+  font-size: 1.3em;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(102, 179, 255, 0.4);
+}
+
+.period-filter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  background: rgba(102, 179, 255, 0.1);
+  border: 1px solid rgba(102, 179, 255, 0.3);
+  border-radius: 8px;
+  color: #e0e0e0;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.filter-btn:hover {
+  background: rgba(102, 179, 255, 0.2);
+  border-color: rgba(102, 179, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 179, 255, 0.3);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #66b3ff 0%, #4a9ff5 100%);
+  border-color: #66b3ff;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(102, 179, 255, 0.4);
+}
+
+/* 履歴セクション */
+.history-section {
+  background: rgba(10, 20, 45, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(102, 179, 255, 0.3);
+  border-radius: 15px;
+  padding: 2em;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2em;
+}
+
+/* 今週の実績セクション */
+.current-week-section {
+  background: linear-gradient(135deg, rgba(102, 179, 255, 0.15), rgba(54, 162, 235, 0.15));
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(102, 179, 255, 0.4);
+  border-radius: 15px;
+  padding: 2em;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2em;
+  animation: fadeInUp 0.5s ease;
+}
+
+.current-week-section h3 {
+  color: #66b3ff;
+  font-size: 1.4em;
+  margin-bottom: 1em;
+  text-shadow: 0 0 15px rgba(102, 179, 255, 0.5);
+  text-align: center;
+}
+
+/* 今週の目標セクション */
+.goal-section-history {
+  background: linear-gradient(135deg, rgba(255, 206, 86, 0.15), rgba(255, 159, 64, 0.15));
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 206, 86, 0.4);
+  border-radius: 15px;
+  padding: 2em;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2em;
+  animation: fadeInUp 0.6s ease;
+}
+
+.goal-section-history h3 {
+  color: #ffce56;
+  font-size: 1.4em;
+  margin-bottom: 1em;
+  text-shadow: 0 0 15px rgba(255, 206, 86, 0.5);
+  text-align: center;
+}
+
+/* 達成率セクション */
+.achievement-section {
+  background: linear-gradient(135deg, rgba(75, 192, 75, 0.15), rgba(153, 102, 255, 0.15));
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(75, 192, 75, 0.4);
+  border-radius: 15px;
+  padding: 2em;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2em;
+  animation: fadeInUp 0.7s ease;
+}
+
+.achievement-section h3 {
+  color: #4bc080;
+  font-size: 1.4em;
+  margin-bottom: 1em;
+  text-shadow: 0 0 15px rgba(75, 192, 128, 0.5);
+  text-align: center;
+}
+
+/* データグリッド */
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1em;
+  margin-bottom: 1.5em;
+}
+
+.data-card {
+  background: rgba(10, 20, 45, 0.6);
+  border-radius: 12px;
+  padding: 1.5em;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.data-card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.actual-card {
+  border-color: rgba(102, 179, 255, 0.3);
+}
+
+.actual-card:hover {
+  border-color: #66b3ff;
+  box-shadow: 0 10px 30px rgba(102, 179, 255, 0.4);
+}
+
+.goal-card {
+  border-color: rgba(255, 206, 86, 0.3);
+}
+
+.goal-card:hover {
+  border-color: #ffce56;
+  box-shadow: 0 10px 30px rgba(255, 206, 86, 0.4);
+}
+
+.card-subject {
+  font-size: 0.9em;
+  color: #b0b0b0;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+.card-value {
+  font-size: 2em;
+  font-weight: bold;
+  color: #fff;
+}
+
+.card-value .unit {
+  font-size: 0.5em;
+  color: #b0b0b0;
+  margin-left: 0.2em;
+}
+
+/* 合計表示 */
+.total-display {
+  text-align: center;
+  font-size: 1.3em;
+  padding: 1em;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.actual-total {
+  background: rgba(102, 179, 255, 0.2);
+  color: #66b3ff;
+  border: 1px solid rgba(102, 179, 255, 0.4);
+}
+
+.goal-total {
+  background: rgba(255, 206, 86, 0.2);
+  color: #ffce56;
+  border: 1px solid rgba(255, 206, 86, 0.4);
+}
+
+/* 達成率テーブル */
+.achievement-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5em;
+  background: rgba(10, 20, 45, 0.6);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.achievement-table thead {
+  background: linear-gradient(135deg, rgba(75, 192, 75, 0.3), rgba(102, 179, 255, 0.3));
+}
+
+.achievement-table th,
+.achievement-table td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid rgba(102, 179, 255, 0.2);
+}
+
+.achievement-table th {
+  color: #66b3ff;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: 1px;
+}
+
+.achievement-row:hover {
+  background: rgba(102, 179, 255, 0.1);
+}
+
+.achievement-percent {
+  color: #4bc080;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.achievement-total-row {
+  background: rgba(75, 192, 75, 0.2);
+  font-weight: bold;
+  border-top: 2px solid rgba(75, 192, 75, 0.5);
+}
+
+.achievement-total-row td {
+  color: #4bc080;
+  font-size: 1.1em;
+}
+
+/* 達成率プログレスバー */
+.achievement-progress-container {
+  margin-top: 1.5em;
+}
+
+.achievement-progress-bar {
+  width: 100%;
+  height: 40px;
+  background: rgba(10, 20, 45, 0.6);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid rgba(102, 179, 255, 0.3);
+  position: relative;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.achievement-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4bc080, #66b3ff, #ffce56);
+  transition: width 1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  animation: progressAnimation 2s ease;
+}
+
+.progress-label {
+  color: white;
+  font-weight: bold;
+  font-size: 1.1em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.achievement-text {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 1.2em;
+  color: #66b3ff;
+  font-weight: 600;
+}
+
+@keyframes progressAnimation {
+  0% { width: 0; }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 今週の目標と実績セクション（削除） */
+.goal-progress-section {
+  background: linear-gradient(135deg, rgba(75, 192, 75, 0.1), rgba(102, 179, 255, 0.1));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(75, 192, 75, 0.3);
+  border-radius: 15px;
+  padding: 2em;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2em;
+}
+
+.goal-progress-section h3 {
+  color: #4bc080;
+  font-size: 1.3em;
+  margin-bottom: 1em;
+  text-shadow: 0 0 10px rgba(75, 192, 128, 0.4);
+}
+
+.goal-table-wrapper {
+  overflow-x: auto;
+}
+
+.goal-progress-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5em;
+  background: rgba(10, 20, 45, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.goal-progress-table thead {
+  background: linear-gradient(135deg, rgba(75, 192, 75, 0.3), rgba(102, 179, 255, 0.3));
+}
+
+.goal-progress-table th,
+.goal-progress-table td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid rgba(102, 179, 255, 0.2);
+}
+
+.goal-progress-table th {
+  color: #66b3ff;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: 1px;
+}
+
+.goal-progress-table tbody tr:hover {
+  background: rgba(102, 179, 255, 0.1);
+}
+
+.goal-progress-table .total-row {
+  background: rgba(75, 192, 75, 0.2);
+  font-weight: bold;
+  border-top: 2px solid rgba(75, 192, 75, 0.5);
+}
+
+.goal-progress-table .total-row td {
+  color: #4bc080;
+  font-size: 1.1em;
+}
+
+.goal-progress-bar-container {
+  margin-top: 1.5em;
+}
+
+.goal-progress-bar {
+  width: 100%;
+  height: 30px;
+  background: rgba(10, 20, 45, 0.5);
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid rgba(102, 179, 255, 0.3);
+  position: relative;
+}
+
+.goal-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4bc080, #66b3ff);
+  transition: width 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+  color: white;
+  font-weight: bold;
+  border-radius: 15px;
+}
+
+.goal-progress-text {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.1em;
+  color: #66b3ff;
+  font-weight: 600;
+}
+
+/* ランキングセクション */
+.ranking-section {
+  background: linear-gradient(135deg, rgba(255, 99, 132, 0.15), rgba(179, 128, 255, 0.15));
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 99, 132, 0.4);
+  border-radius: 15px;
+  padding: 2em;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2em;
+  animation: fadeInUp 0.8s ease;
+}
+
+.ranking-section h3 {
+  color: #ff6384;
+  font-size: 1.4em;
+  margin-bottom: 1em;
+  text-shadow: 0 0 15px rgba(255, 99, 132, 0.5);
+  text-align: center;
+}
+
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rank-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: rgba(10, 20, 45, 0.5);
+  border: 1px solid rgba(102, 179, 255, 0.2);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.rank-item:hover {
+  border-color: #66b3ff;
+  transform: translateX(5px);
+}
+
+.rank-item.current-user {
+  background: rgba(102, 179, 255, 0.2);
+  border: 2px solid #66b3ff;
+  box-shadow: 0 0 20px rgba(102, 179, 255, 0.3);
+}
+
+.rank-number {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #66b3ff;
+  min-width: 60px;
+}
+
+.rank-user {
+  flex: 1;
+  font-size: 1.1em;
+  color: #e0e0e0;
+  text-align: left;
+  margin-left: 20px;
+}
+
+.rank-item.current-user .rank-user {
+  color: #fff;
+  font-weight: bold;
+}
+
+.rank-time {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #b380ff;
+}
+
+.my-rank {
+  margin-top: 1.5em;
+  padding: 15px;
+  background: rgba(102, 179, 255, 0.2);
+  border: 2px solid #66b3ff;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.2em;
+  color: #e0e0e0;
+}
+
+.my-rank strong {
+  color: #66b3ff;
+  font-size: 1.3em;
+}
+
+.loading, .no-data {
+  text-align: center;
+  color: #888;
+  font-size: 1.1em;
+  padding: 2em;
+}
+
+
+.history-section h3 {
+  color: #66b3ff;
+  font-size: 1.3em;
+  margin-bottom: 1em;
+  text-shadow: 0 0 10px rgba(102, 179, 255, 0.4);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: rgba(102, 179, 255, 0.2);
+}
+
+th {
+  padding: 1em;
+  color: #66b3ff;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 2px solid rgba(102, 179, 255, 0.4);
+}
+
+td {
+  padding: 1em;
+  color: #e0e0e0;
+  border-bottom: 1px solid rgba(102, 179, 255, 0.1);
+}
+
+tbody tr {
+  transition: all 0.3s ease;
+}
+
+tbody tr:hover {
+  background: rgba(102, 179, 255, 0.1);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+td:last-child {
+  font-weight: bold;
+  color: #66b3ff;
+}
+
+footer {
+  text-align: center;
+  padding: 2em;
+  background: rgba(10, 20, 45, 0.5);
+  border-top: 1px solid rgba(102, 179, 255, 0.3);
+  color: #888;
+  position: relative;
+  z-index: 1;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 1em;
+    padding: 15px 20px;
+  }
+
+  header h1 {
+    font-size: 1.4em;
+  }
+
+  main {
+    padding: 0 1em;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-value {
+    font-size: 1.5em;
+  }
+
+  table {
+    font-size: 0.9em;
+  }
+
+  th, td {
+    padding: 0.7em 0.5em;
+  }
+}

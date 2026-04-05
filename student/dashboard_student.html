@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生徒ダッシュボード | STARS</title>
+  <link rel="stylesheet" href="../ui-foundation.css">
+  <link rel="stylesheet" href="../ui-polish.css">
+  <link rel="stylesheet" href="dashboard_student.css">
+  <link rel="stylesheet" href="../ui-unified.css">
+  <link rel="stylesheet" href="../ui-information.css">
+</head>
+<body class="student-dashboard-page">
+  <div class="stars-bg" aria-hidden="true"></div>
+
+  <header class="dashboard-header">
+    <div class="header-left">
+      <h1><a href="../index.html" class="brand-link">✨ STARS</a></h1>
+    </div>
+    <nav class="header-nav">
+      <a href="dashboard_student.html" class="nav-link active">📊 ダッシュボード</a>
+      <a href="calendar.html" class="nav-link">📆 カレンダー</a>
+      <a href="test_results.html" class="nav-link">📈 テスト結果</a>
+      <a href="learning_management.html" class="nav-link">⏱️ 学習管理</a>
+      <a href="learning_history.html" class="nav-link">📋 学習履歴</a>
+      <a href="materials.html" class="nav-link">📚 教材</a>
+      <a href="ranking.html" class="nav-link">🏆 ランキング</a>
+      <a href="members.html" class="nav-link">👥 メンバー</a>
+    </nav>
+    <div class="header-right">
+      <a href="student_login.html" id="logout-btn" class="login-btn">ログアウト</a>
+    </div>
+  </header>
+
+  <main class="dashboard">
+    <section class="dashboard-overview reveal-card">
+      <div>
+        <h2>生徒ダッシュボード</h2>
+        <p id="student-name" class="student-name-display"></p>
+        <p class="overview-note">今日やることを先に決めてから学習を始めると、継続しやすくなります。</p>
+      </div>
+      <div class="quick-actions">
+        <a href="learning_management.html">学習時間を提出</a>
+        <a href="materials.html">教材を開く</a>
+        <a href="learning_history.html">履歴を確認</a>
+        <a href="ranking.html">ランキングを見る</a>
+      </div>
+    </section>
+
+    <div class="section-head">
+      <h3>今週の進捗サマリー</h3>
+      <p>学習量・連続日数・タスク達成を確認</p>
+    </div>
+
+    <!-- 統計サマリー -->
+    <div class="stats-summary reveal-card">
+      <div class="stat-card">
+        <div class="stat-icon">📚</div>
+        <div class="stat-value" id="total-study-hours">0</div>
+        <div class="stat-label">今月の学習時間</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🔥</div>
+        <div class="stat-value" id="streak-days">0</div>
+        <div class="stat-label">連続学習日数</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">✅</div>
+        <div class="stat-value" id="completed-tasks">0</div>
+        <div class="stat-label">完了タスク</div>
+      </div>
+
+    </div>
+
+    <div class="insights-strip reveal-card">
+      <article class="insight-card">
+        <p class="insight-label">今週の目標進捗</p>
+        <p class="insight-value" id="goal-progress-text">目標データを確認中...</p>
+      </article>
+      <article class="insight-card">
+        <p class="insight-label">今日のタスク達成率</p>
+        <p class="insight-value" id="task-progress-text">タスクデータを確認中...</p>
+      </article>
+    </div>
+
+    <section class="dashboard-focus reveal-card" aria-label="次に取るべき行動">
+      <article class="focus-card">
+        <p class="focus-label">Priority 1</p>
+        <h4>学習時間の提出状況を確認</h4>
+        <p>先週分が未提出なら、まず学習管理ページで提出を完了しましょう。</p>
+        <a href="learning_management.html">提出画面を開く</a>
+      </article>
+      <article class="focus-card">
+        <p class="focus-label">Priority 2</p>
+        <h4>目標との差分を埋める</h4>
+        <p>グラフの不足教科を確認して、今日のタスクを1つ追加します。</p>
+        <a href="#task-list">タスクを確認する</a>
+      </article>
+      <article class="focus-card">
+        <p class="focus-label">Priority 3</p>
+        <h4>履歴で継続をチェック</h4>
+        <p>連続日数が落ちる前に、短時間でも学習ログを残しましょう。</p>
+        <a href="learning_history.html">履歴ページへ</a>
+      </article>
+    </section>
+
+    <div class="section-head">
+      <h3>今日の実行タスク</h3>
+      <p>完了チェックで達成数が自動更新されます</p>
+    </div>
+
+    <!-- 今日のタスク -->
+    <div class="today-tasks reveal-card">
+      <h3>📋 今日のタスク</h3>
+      <div id="task-list">
+        <!-- JavaScriptで動的生成 -->
+      </div>
+      <button class="add-task-btn" id="add-task-btn">+ 新しいタスクを追加</button>
+    </div>
+
+    <div class="section-head">
+      <h3>目標と実績の比較</h3>
+      <p>同じ軸で比較して学習バランスを確認</p>
+    </div>
+
+    <!-- 今週の目標と実績 -->
+    <div class="goal-and-actual-section">
+      <!-- 今週の目標時間 -->
+      <div class="study-chart reveal-card">
+        <div class="chart-header">
+          <h3>🎯 今週の目標時間</h3>
+          <a href="learning_management.html" class="detail-link">目標を設定 ›</a>
+        </div>
+        <canvas id="goalChart"></canvas>
+        <p class="chart-note" id="goal-note">目標未設定</p>
+      </div>
+
+      <!-- 先週の学習実績 -->
+      <div class="study-chart reveal-card">
+        <div class="chart-header">
+          <h3>📊 先週の学習実績</h3>
+          <a href="learning_history.html" class="detail-link">詳細を見る ›</a>
+        </div>
+        <canvas id="actualChart"></canvas>
+        <p class="chart-note" id="actual-note">未提出</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 STARS All Rights Reserved.</p>
+  </footer>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- 外部JavaScriptを読み込み -->
+  <script src="dashboard_student.js"></script>
+</body>
+</html>

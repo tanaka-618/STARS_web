@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生徒ログイン | STARS</title>
+  <link rel="stylesheet" href="../ui-foundation.css">
+  <link rel="stylesheet" href="student_login.css">
+  <link rel="stylesheet" href="../ui-unified.css">
+</head>
+<body class="student-login-page">
+  <div class="stars-bg" aria-hidden="true"></div>
+
+  <header>
+    <div class="header-left">
+      <h1><a href="../index.html" class="brand-link">STARS</a></h1>
+      <p class="brand-tag">STUDENT PORTAL</p>
+    </div>
+    <div class="header-right">
+      <a href="../index.html" class="login-btn">ホームに戻る</a>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <section class="login-section">
+      <p class="panel-kicker">生徒向けログイン</p>
+      <h2>生徒ログイン</h2>
+      <p class="panel-description">ユーザーIDとパスワードを入力して、学習ダッシュボードにアクセスします。</p>
+
+      <form class="login-form" id="login-form">
+        <label for="student-id">ユーザーID</label>
+        <input type="text" id="student-id" name="student-id" placeholder="例: a" autocomplete="username" required>
+
+        <label for="password">パスワード</label>
+        <input type="password" id="password" name="password" placeholder="パスワード" autocomplete="current-password" required>
+
+        <button type="submit" class="btn">ログイン</button>
+      </form>
+
+      <p id="message" class="note"></p>
+
+      <div class="quick-links">
+        <a href="dashboard_student.html">ダッシュボードを見る</a>
+        <a href="../news/news.html">お知らせを見る</a>
+      </div>
+
+      <div class="support-card">
+        <h3>学習を進めるポイント</h3>
+        <ul>
+          <li>まずは今日のタスクを確認</li>
+          <li>終わったら学習時間を記録</li>
+          <li>週末に履歴を振り返る</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 STARS All Rights Reserved.</p>
+  </footer>
+
+  <!-- 🔹 生徒情報ファイルを読み込み -->
+  <script src="student_login.js"></script>
+
+  <!-- 🔹 ログイン処理 -->
+  <script>
+    const form = document.getElementById("login-form");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const id = document.getElementById("student-id").value.trim();
+      const pw = document.getElementById("password").value.trim();
+
+      const match = students.find(s => s.id === id && s.password === pw);
+
+      if (match) {
+      localStorage.setItem("username", id);  // ✅ ユーザー名保存
+      localStorage.setItem("fullname", match.name);
+      localStorage.setItem("userType", "student");  // ✅ ユーザータイプ保存  
+        message.textContent = "✅ ログイン成功。少々お待ちください…";
+        message.style.color = "#66ffcc";
+        setTimeout(() => {
+          window.location.href = "dashboard_student.html";
+        }, 1500);
+      } else {
+        message.textContent = "⚠️ ユーザーIDまたはパスワードが違います。";
+        message.style.color = "#ff6699";
+      }
+    });
+  </script>
+</body>
+</html>

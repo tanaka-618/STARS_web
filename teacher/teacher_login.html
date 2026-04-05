@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>講師ログイン | STARS</title>
+  <link rel="stylesheet" href="../ui-foundation.css">
+  <link rel="stylesheet" href="teacher_login.css">
+  <link rel="stylesheet" href="../ui-unified.css">
+</head>
+<body class="teacher-login-page">
+  <div class="stars-bg" aria-hidden="true"></div>
+
+  <header>
+    <div class="header-left">
+      <h1><a href="../index.html" class="brand-link">STARS</a></h1>
+      <p class="brand-tag">TEACHER PORTAL</p>
+    </div>
+    <div class="header-right">
+      <a href="../index.html" class="login-btn">ホームに戻る</a>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <section class="login-section">
+      <p class="panel-kicker">講師向けログイン</p>
+      <h2>講師ログイン</h2>
+      <p class="panel-description">担当生徒の学習記録・教材管理・ダッシュボードへアクセスします。</p>
+
+      <form class="login-form" id="login-form">
+        <label for="teacher-id">ユーザーID</label>
+        <input type="text" id="teacher-id" name="teacher-id" placeholder="例: a" autocomplete="username" required>
+
+        <label for="password">パスワード</label>
+        <input type="password" id="password" name="password" placeholder="パスワード" autocomplete="current-password" required>
+
+        <button type="submit" class="btn">ログイン</button>
+      </form>
+
+      <p id="message" class="note"></p>
+
+      <div class="quick-links">
+        <a href="teacher_dashboard.html">講師ダッシュボード</a>
+        <a href="student_records.html">生徒記録管理</a>
+      </div>
+
+      <div class="support-card">
+        <h3>運用チェックリスト</h3>
+        <ul>
+          <li>提出状況の確認</li>
+          <li>教材の更新と配布</li>
+          <li>週次データのレビュー</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 STARS All Rights Reserved.</p>
+  </footer>
+
+  <script src="teacher_login.js"></script>
+
+  <script>
+    const form = document.getElementById("login-form");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const id = document.getElementById("teacher-id").value.trim();
+      const pw = document.getElementById("password").value.trim();
+
+      const match = teachers.find(t => t.id === id && t.password === pw);
+
+      if (match) {
+        localStorage.setItem("userType", "teacher");  // ✅ ユーザータイプ保存
+        message.textContent = "✅ ログイン成功。講師ページへ移動いたします。";
+        message.style.color = "#cc99ff";
+        setTimeout(() => {
+          window.location.href = "dashboard_teacher.html";
+        }, 1500);
+      } else {
+        message.textContent = "⚠️ ユーザーIDまたはパスワードが違います。";
+        message.style.color = "#ff6699";
+      }
+    });
+  </script>
+</body>
+</html>

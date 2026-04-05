@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>講師ダッシュボード | STARS</title>
+  <link rel="stylesheet" href="../ui-foundation.css" />
+  <link rel="stylesheet" href="teacher_dashboard.css" />
+  <link rel="stylesheet" href="../ui-unified.css" />
+  <link rel="stylesheet" href="../ui-information.css" />
+</head>
+<body class="teacher-dashboard-page">
+  <div class="stars-bg" aria-hidden="true"></div>
+
+  <header class="teacher-header">
+    <div class="header-content">
+      <div class="header-title-group">
+        <h1>講師 学習記録ダッシュボード</h1>
+        <p>提出データを俯瞰し、指導判断を素早く行うための画面です。</p>
+      </div>
+      <nav class="header-nav">
+        <a href="dashboard_teacher.html" class="nav-btn">ポータル</a>
+        <a href="student_records.html" class="nav-btn">生徒記録管理</a>
+        <a href="teacher_materials.html" class="nav-btn">教材管理</a>
+        <a href="teacher_login.html" class="logout-btn">ログアウト</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="ia-hero panel">
+      <div>
+        <h2 class="ia-hero-title">指導判断の流れ</h2>
+        <p class="ia-hero-copy">1. 週次記録で状況把握 → 2. 生徒別累計で優先度判断 → 3. 教科合計で全体傾向を確認します。</p>
+      </div>
+      <div class="ia-kpi-row">
+        <div class="ia-kpi"><span class="ia-kpi-label">Weekly</span><span class="ia-kpi-value">週別データ確認</span></div>
+        <div class="ia-kpi"><span class="ia-kpi-label">Student</span><span class="ia-kpi-value">個別総量比較</span></div>
+        <div class="ia-kpi"><span class="ia-kpi-label">Subject</span><span class="ia-kpi-value">教科偏り分析</span></div>
+        <div class="ia-kpi"><span class="ia-kpi-label">Action</span><span class="ia-kpi-value">CSV保存・共有</span></div>
+      </div>
+    </section>
+
+    <section class="control-section panel">
+      <div class="control-card">
+        <button id="export-csv" class="export-btn">📥 CSVをエクスポート</button>
+      </div>
+    </section>
+
+    <section class="kpi-grid panel">
+      <article class="kpi-card">
+        <span class="kpi-label">対象生徒</span>
+        <strong id="kpi-students">0名</strong>
+      </article>
+      <article class="kpi-card">
+        <span class="kpi-label">提出レコード</span>
+        <strong id="kpi-records">0件</strong>
+      </article>
+      <article class="kpi-card">
+        <span class="kpi-label">総学習時間</span>
+        <strong id="kpi-total-minutes">0分</strong>
+      </article>
+      <article class="kpi-card">
+        <span class="kpi-label">最新提出週</span>
+        <strong id="kpi-latest-week">-</strong>
+      </article>
+    </section>
+
+    <section class="table-section panel">
+      <div class="table-card">
+        <div class="ia-section-head">
+          <h2>📋 週ごとの学習記録</h2>
+          <p class="ia-section-note">提出単位の時系列比較</p>
+        </div>
+        <p class="section-description">各生徒の1週間ごとの学習記録</p>
+        <div class="table-toolbar" aria-label="学習記録の絞り込み">
+          <label class="toolbar-field">
+            <span>生徒検索</span>
+            <input type="search" id="table-search-user" placeholder="ユーザー名で検索" />
+          </label>
+          <label class="toolbar-field">
+            <span>週で絞り込み</span>
+            <select id="table-filter-week">
+              <option value="">すべての週</option>
+            </select>
+          </label>
+          <button type="button" class="toolbar-reset" id="table-filter-reset">リセット</button>
+          <p class="toolbar-count" id="table-visible-count">0件表示</p>
+        </div>
+        <div class="table-wrapper">
+          <table id="dashboard-table">
+            <thead>
+              <tr>
+                <th>ユーザー</th>
+                <th>週</th>
+                <th>国語</th>
+                <th>数学</th>
+                <th>英語</th>
+                <th>理科</th>
+                <th>社会</th>
+                <th>課題</th>
+                <th>合計</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="table-section panel">
+      <div class="table-card">
+        <div class="ia-section-head">
+          <h2>👥 生徒ごとの合計学習時間</h2>
+          <p class="ia-section-note">累計と週平均で負荷を把握</p>
+        </div>
+        <p class="section-description">各生徒の全期間の累計学習時間</p>
+        <div class="table-wrapper">
+          <table id="student-summary-table">
+            <thead>
+              <tr>
+                <th>ユーザー</th>
+                <th>提出週数</th>
+                <th>国語</th>
+                <th>数学</th>
+                <th>英語</th>
+                <th>理科</th>
+                <th>社会</th>
+                <th>課題</th>
+                <th>総合計</th>
+                <th>週平均</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="chart-section panel">
+      <div class="chart-card">
+        <div class="ia-section-head">
+          <h2>📊 教科別 学習時間合計</h2>
+          <p class="ia-section-note">全体の教科バランス確認</p>
+        </div>
+        <canvas id="subjectChart"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 STARS</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="teacher_dashboard.js"></script>
+</body>
+</html>

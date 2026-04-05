@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>生徒学習記録管理 | STARS</title>
+  <link rel="stylesheet" href="../ui-foundation.css" />
+  <link rel="stylesheet" href="../ui-polish.css" />
+  <link rel="stylesheet" href="student_records.css" />
+  <link rel="stylesheet" href="../ui-unified.css" />
+  <link rel="stylesheet" href="../ui-information.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="teacher-records-page">
+  <div class="stars-bg"></div>
+
+  <header>
+    <button class="back-btn" onclick="location.href='teacher_dashboard.html'">← ダッシュボード</button>
+    <div class="header-center">
+      <h1>📊 生徒学習記録管理</h1>
+      <p class="header-subtitle">全生徒の学習時間と目標を管理</p>
+    </div>
+    <button class="logout-btn" onclick="location.href='teacher_login.html'">ログアウト</button>
+  </header>
+
+  <main>
+    <section class="ia-hero">
+      <div>
+        <h2 class="ia-hero-title">記録管理の進め方</h2>
+        <p class="ia-hero-copy">フィルターで対象を絞り、サマリーとグラフで把握した後、詳細テーブルで個別確認します。</p>
+      </div>
+      <div class="ia-kpi-row">
+        <div class="ia-kpi"><span class="ia-kpi-label">Filter</span><span class="ia-kpi-value">対象絞り込み</span></div>
+        <div class="ia-kpi"><span class="ia-kpi-label">Summary</span><span class="ia-kpi-value">全体指標</span></div>
+        <div class="ia-kpi"><span class="ia-kpi-label">Chart</span><span class="ia-kpi-value">傾向確認</span></div>
+        <div class="ia-kpi"><span class="ia-kpi-label">Table</span><span class="ia-kpi-value">詳細確認</span></div>
+      </div>
+    </section>
+
+    <!-- フィルターセクション -->
+    <section class="filter-section">
+      <div class="filter-card">
+        <div class="ia-section-head">
+          <h3>🔍 フィルター</h3>
+          <span class="ia-action-inline">条件変更で即時反映</span>
+        </div>
+        <div class="filter-controls">
+          <div class="filter-group">
+            <label>👤 生徒選択</label>
+            <select id="student-filter">
+              <option value="all">全生徒</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>📅 表示期間</label>
+            <select id="period-filter">
+              <option value="all">全期間</option>
+              <option value="year">今年</option>
+              <option value="6months">半年</option>
+              <option value="3months">3ヶ月</option>
+              <option value="1month">1ヶ月</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>📈 表示形式</label>
+            <select id="view-mode">
+              <option value="table">テーブル表示</option>
+              <option value="chart">グラフ表示</option>
+              <option value="both">両方表示</option>
+            </select>
+          </div>
+          <button class="export-btn" id="export-csv">📥 CSVエクスポート</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 統計サマリー -->
+    <section class="summary-section" id="summary-section">
+      <div class="summary-card">
+        <div class="summary-icon">👥</div>
+        <div class="summary-content">
+          <div class="summary-value" id="total-students">0</div>
+          <div class="summary-label">総生徒数</div>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon">📝</div>
+        <div class="summary-content">
+          <div class="summary-value" id="total-submissions">0</div>
+          <div class="summary-label">総提出数</div>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon">⏱️</div>
+        <div class="summary-content">
+          <div class="summary-value" id="total-hours">0分</div>
+          <div class="summary-label">総学習時間</div>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon">📊</div>
+        <div class="summary-content">
+          <div class="summary-value" id="avg-hours">0分</div>
+          <div class="summary-label">平均学習時間/週</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- グラフ表示 -->
+    <section class="chart-section" id="chart-section">
+      <div class="chart-card">
+        <p class="ia-section-note">生徒ごとの推移を比較</p>
+        <h3>📈 生徒別学習時間推移</h3>
+        <canvas id="studentTrendChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <p class="ia-section-note">教科別の偏りを把握</p>
+        <h3>📊 科目別学習時間</h3>
+        <canvas id="subjectComparisonChart"></canvas>
+      </div>
+    </section>
+
+    <!-- テーブル表示 -->
+    <section class="table-section" id="table-section">
+      <div class="table-card">
+        <div class="ia-section-head">
+          <h3>📋 詳細記録一覧</h3>
+          <p class="ia-section-note">並び替えと検索で対象を特定</p>
+        </div>
+        <div class="table-controls">
+          <input type="text" id="search-box" placeholder="🔍 生徒名で検索..." />
+          <div class="sort-controls">
+            <label>並び替え:</label>
+            <select id="sort-by">
+              <option value="date-desc">日付（新しい順）</option>
+              <option value="date-asc">日付（古い順）</option>
+              <option value="student-asc">生徒名（昇順）</option>
+              <option value="total-desc">学習時間（多い順）</option>
+              <option value="total-asc">学習時間（少ない順）</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table id="records-table">
+            <thead>
+              <tr>
+                <th>生徒名</th>
+                <th>週</th>
+                <th>国語<br><small>実績/目標</small></th>
+                <th>数学<br><small>実績/目標</small></th>
+                <th>英語<br><small>実績/目標</small></th>
+                <th>理科<br><small>実績/目標</small></th>
+                <th>社会<br><small>実績/目標</small></th>
+                <th>課題<br><small>実績/目標</small></th>
+                <th>合計<br><small>実績/目標</small></th>
+                <th>提出日時</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 STARS - 講師用管理システム</p>
+  </footer>
+
+  <script src="student_records.js"></script>
+</body>
+</html>

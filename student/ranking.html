@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学習ランキング | STARS</title>
+  <link rel="stylesheet" href="../ui-foundation.css">
+  <link rel="stylesheet" href="../ui-polish.css">
+  <link rel="stylesheet" href="ranking.css">
+  <link rel="stylesheet" href="../ui-unified.css">
+</head>
+<body class="student-ranking-page">
+  <div class="stars-bg"></div>
+
+  <header>
+    <div class="header-left">
+      <h1><a href="../index.html" class="brand-link">✨ STARS</a></h1>
+    </div>
+    <nav class="header-nav">
+      <a href="dashboard_student.html" class="nav-link">📊 ダッシュボード</a>
+      <a href="calendar.html" class="nav-link">📆 カレンダー</a>
+      <a href="test_results.html" class="nav-link">📈 テスト結果</a>
+      <a href="learning_management.html" class="nav-link">⏱️ 学習管理</a>
+      <a href="learning_history.html" class="nav-link">📋 学習履歴</a>
+      <a href="materials.html" class="nav-link">📚 教材</a>
+      <a href="ranking.html" class="nav-link active">🏆 ランキング</a>
+      <a href="members.html" class="nav-link">👥 メンバー</a>
+    </nav>
+    <div class="header-right">
+      <a href="dashboard_student.html" class="login-btn">ダッシュボードへ</a>
+    </div>
+  </header>
+
+  <main class="ranking-main">
+    <h2>🏆 学習時間ランキング</h2>
+    <p class="subtitle">今月の学習時間上位者</p>
+
+    <!-- フィルター -->
+    <div class="filter-section">
+      <button class="filter-btn active" data-period="month">今月</button>
+      <button class="filter-btn" data-period="week">今週</button>
+      <button class="filter-btn" data-period="all">全期間</button>
+    </div>
+
+    <!-- 自分の順位 -->
+    <div class="my-rank-card">
+      <h3>あなたの順位</h3>
+      <div class="my-rank-content">
+        <div class="rank-badge" id="my-rank">-</div>
+        <div class="rank-details">
+          <div class="rank-name" id="my-name">-</div>
+          <div class="rank-hours" id="my-hours">-時間</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ランキングリスト -->
+    <div class="ranking-list" id="ranking-list">
+      <!-- JavaScriptで動的生成 -->
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 STARS All Rights Reserved.</p>
+  </footer>
+
+  <script src="ranking.js"></script>
+</body>
+</html>

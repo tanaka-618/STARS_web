@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>学習履歴 | STARS</title>
+  <link rel="stylesheet" href="../ui-foundation.css" />
+  <link rel="stylesheet" href="../ui-polish.css" />
+  <link rel="stylesheet" href="learning_history.css" />
+  <link rel="stylesheet" href="../ui-unified.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="student-history-page">
+  <div class="stars-bg"></div>
+
+  <header>
+    <div class="header-left">
+      <h1><a href="../index.html" class="brand-link">✨ STARS</a></h1>
+    </div>
+    <nav class="header-nav" aria-label="生徒ページナビゲーション">
+      <a href="dashboard_student.html" class="nav-link">📊 ダッシュボード</a>
+      <a href="calendar.html" class="nav-link">📆 カレンダー</a>
+      <a href="test_results.html" class="nav-link">📈 テスト結果</a>
+      <a href="learning_management.html" class="nav-link">⏱️ 学習管理</a>
+      <a href="learning_history.html" class="nav-link active">📋 学習履歴</a>
+      <a href="materials.html" class="nav-link">📚 教材</a>
+      <a href="ranking.html" class="nav-link">🏆 ランキング</a>
+      <a href="members.html" class="nav-link">👥 メンバー</a>
+    </nav>
+    <div class="header-right">
+      <a href="dashboard_student.html" class="login-btn">ダッシュボードへ</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="filter-section">
+      <h3>📊 学習履歴の詳細 <span id="user-label" class="header-user"></span></h3>
+    </section>
+
+    <!-- 総合統計 -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <h3>📚 総学習時間</h3>
+        <p class="stat-value" id="total-time">0時間</p>
+      </div>
+      <div class="stat-card">
+        <h3>📅 提出週数</h3>
+        <p class="stat-value" id="week-count">0週</p>
+      </div>
+      <div class="stat-card">
+        <h3>⭐ 平均学習時間</h3>
+        <p class="stat-value" id="avg-time">0時間/週</p>
+      </div>
+      <div class="stat-card">
+        <h3>🎯 最も学習した科目</h3>
+        <p class="stat-value" id="top-subject">-</p>
+      </div>
+    </section>
+
+    <!-- 今週の実績セクション -->
+    <section class="current-week-section">
+      <h3 id="current-week-title">📝 今週の学習実績</h3>
+      <div id="current-week-container">
+        <p class="loading">実績データを読み込み中...</p>
+      </div>
+    </section>
+
+    <!-- 今週の目標セクション -->
+    <section class="goal-section-history">
+      <h3>🎯 今週の目標時間</h3>
+      <div id="goal-container">
+        <p class="loading">目標データを読み込み中...</p>
+      </div>
+    </section>
+
+    <!-- ランキングセクション -->
+    <section class="ranking-section">
+      <h3>🏆 今週の学習時間ランキング</h3>
+      <div id="ranking-container">
+        <p class="loading">ランキングを読み込み中...</p>
+      </div>
+    </section>
+
+    <!-- グラフセクション -->
+    <section class="chart-section">
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3>📊 週ごとの学習時間推移</h3>
+          <div class="period-filter">
+            <button class="filter-btn active" data-period="all">全期間</button>
+            <button class="filter-btn" data-period="year">今年</button>
+            <button class="filter-btn" data-period="6months">半年</button>
+            <button class="filter-btn" data-period="3months">3ヶ月</button>
+            <button class="filter-btn" data-period="1month">1ヶ月</button>
+          </div>
+        </div>
+        <canvas id="weeklyTrendChart"></canvas>
+      </div>
+    </section>
+
+    <section class="chart-section">
+      <div class="chart-card">
+        <h3>📚 科目別総学習時間</h3>
+        <canvas id="subjectTotalChart"></canvas>
+      </div>
+    </section>
+
+    <!-- 提出履歴テーブル -->
+    <section class="history-section">
+      <h3>📋 週ごとの詳細記録</h3>
+      <div class="table-wrapper">
+        <table id="history-table">
+          <thead>
+            <tr>
+              <th>週</th>
+              <th>国語</th>
+              <th>数学</th>
+              <th>英語</th>
+              <th>理科</th>
+              <th>社会</th>
+              <th>課題</th>
+              <th>合計</th>
+              <th>目標</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 STARS</p>
+  </footer>
+
+  <script src="learning_history.js"></script>
+</body>
+</html>

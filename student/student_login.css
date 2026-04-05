@@ -1,0 +1,225 @@
+.student-login-page {
+  min-height: 100vh;
+}
+
+.stars-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(1000px 460px at 18% -8%, rgba(20, 184, 166, 0.26), transparent 66%),
+    radial-gradient(900px 580px at 100% 0%, rgba(14, 165, 233, 0.24), transparent 68%),
+    linear-gradient(170deg, rgba(6, 16, 30, 0.88), rgba(10, 34, 56, 0.9));
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px clamp(16px, 4vw, 52px);
+  background: rgba(8, 24, 40, 0.7);
+  border-bottom: 1px solid rgba(118, 192, 231, 0.28);
+  backdrop-filter: blur(10px);
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brand-link {
+  text-decoration: none;
+  color: #e9f8ff;
+  letter-spacing: 0.1em;
+}
+
+.brand-tag {
+  margin: 0;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #96c7e3;
+}
+
+.login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #ddf4ff;
+  border: 1px solid rgba(126, 201, 241, 0.4);
+  background: rgba(10, 36, 58, 0.36);
+}
+
+.login-btn:hover {
+  background: rgba(14, 165, 233, 0.26);
+  color: #ffffff;
+}
+
+.auth-main {
+  width: min(980px, 100% - 24px);
+  margin: 0 auto;
+  padding: clamp(28px, 6vh, 64px) 0;
+}
+
+.login-section {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: clamp(22px, 5vw, 38px);
+  border-radius: 24px;
+  background: rgba(10, 28, 48, 0.74);
+  border: 1px solid rgba(125, 190, 230, 0.3);
+  box-shadow: 0 22px 44px rgba(4, 20, 34, 0.36);
+  backdrop-filter: blur(8px);
+}
+
+.panel-kicker {
+  margin: 0;
+  color: #80d9ea;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.login-section h2 {
+  margin: 10px 0 8px;
+  color: #eff8ff;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+}
+
+.panel-description {
+  margin: 0 0 18px;
+  color: #b4d3e8;
+  font-size: 0.94rem;
+}
+
+.login-form {
+  display: grid;
+  gap: 12px;
+}
+
+.login-form label {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #c6e4f6;
+}
+
+.login-form input {
+  width: 100%;
+  min-height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(125, 190, 230, 0.34);
+  padding: 10px 14px;
+  background: rgba(8, 28, 46, 0.82);
+  color: #eef8ff;
+}
+
+.login-form input::placeholder {
+  color: rgba(173, 207, 230, 0.74);
+}
+
+.login-form input:focus {
+  border-color: rgba(45, 212, 191, 0.9);
+  box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.2);
+}
+
+.btn {
+  min-height: 46px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 12px;
+  color: #f8ffff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  background: linear-gradient(135deg, #0ea5e9, #2dd4bf);
+  box-shadow: 0 12px 26px rgba(14, 165, 233, 0.32);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.note {
+  min-height: 1.6em;
+  margin: 12px 0 4px;
+  font-size: 0.9rem;
+}
+
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.quick-links a {
+  font-size: 0.82rem;
+  color: #bde8ff;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(14, 165, 233, 0.16);
+  border: 1px solid rgba(122, 198, 237, 0.33);
+}
+
+.quick-links a:hover {
+  color: #ffffff;
+}
+
+.support-card {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(8, 31, 52, 0.72);
+  border: 1px solid rgba(126, 197, 238, 0.24);
+}
+
+.support-card h3 {
+  margin: 0 0 8px;
+  font-size: 0.98rem;
+  color: #e9f7ff;
+}
+
+.support-card ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #b6d8ee;
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+footer {
+  text-align: center;
+  padding: 18px;
+  color: #9dc0d6;
+  font-size: 0.84rem;
+}
+
+@media (max-width: 640px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px;
+  }
+
+  .auth-main {
+    width: min(980px, 100% - 14px);
+  }
+
+  .login-section {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .quick-links a {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}

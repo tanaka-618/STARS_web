@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>テスト結果集計 | STARS</title>
+  <link rel="stylesheet" href="../ui-foundation.css">
+  <link rel="stylesheet" href="../ui-polish.css">
+  <link rel="stylesheet" href="test_results.css">
+  <link rel="stylesheet" href="../ui-unified.css">
+  <link rel="stylesheet" href="../ui-information.css">
+</head>
+<body class="student-test-results-page">
+  <div class="stars-bg"></div>
+
+  <header>
+    <div class="header-left">
+      <h1><a href="../index.html" class="brand-link">✨ STARS</a></h1>
+    </div>
+    <nav class="header-nav">
+      <a href="dashboard_student.html" class="nav-link">📊 ダッシュボード</a>
+      <a href="calendar.html" class="nav-link">📆 カレンダー</a>
+      <a href="test_results.html" class="nav-link active">📈 テスト結果</a>
+      <a href="learning_management.html" class="nav-link">⏱️ 学習管理</a>
+      <a href="learning_history.html" class="nav-link">📋 学習履歴</a>
+      <a href="materials.html" class="nav-link">📚 教材</a>
+      <a href="ranking.html" class="nav-link">🏆 ランキング</a>
+      <a href="members.html" class="nav-link">👥 メンバー</a>
+    </nav>
+    <div class="header-right">
+      <a href="dashboard_student.html" class="login-btn">ダッシュボードへ</a>
+    </div>
+  </header>
+
+  <main class="test-results-main">
+    <section class="ia-hero">
+      <div>
+        <h2 class="ia-hero-title">結果管理の見方</h2>
+        <p class="ia-hero-copy">上段で全体傾向を確認し、中段で新しい結果を追加、下段で条件検索して詳細を確認します。</p>
+      </div>
+      <div class="ia-kpi-row">
+        <div class="ia-kpi"><span class="ia-kpi-label">Overview</span><span class="ia-kpi-value">統計サマリー</span></div>
+        <div class="ia-kpi"><span class="ia-kpi-label">Visualize</span><span class="ia-kpi-value">科目・推移グラフ</span></div>
+        <div class="ia-kpi"><span class="ia-kpi-label">Input</span><span class="ia-kpi-value">新規結果追加</span></div>
+        <div class="ia-kpi"><span class="ia-kpi-label">Search</span><span class="ia-kpi-value">一覧絞り込み</span></div>
+      </div>
+    </section>
+
+    <h2>📊 テスト結果集計</h2>
+    <p class="subtitle">過去のテスト結果を分析・確認</p>
+
+    <!-- 統計サマリー -->
+    <div class="stats-summary">
+      <div class="stat-card">
+        <div class="stat-icon">📝</div>
+        <div class="stat-value" id="total-tests">0</div>
+        <div class="stat-label">受験テスト数</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-value" id="average-score">0</div>
+        <div class="stat-label">平均点</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📈</div>
+        <div class="stat-value" id="highest-score">0</div>
+        <div class="stat-label">最高点</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-value" id="improvement">+0</div>
+        <div class="stat-label">前回比</div>
+      </div>
+    </div>
+
+    <!-- グラフエリア -->
+    <div class="chart-section">
+      <div class="chart-card">
+        <p class="ia-section-note">科目ごとの弱点・強みを確認</p>
+        <h3>📊 科目別平均点</h3>
+        <canvas id="subjectChart"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <p class="ia-section-note">最新までの点数推移を確認</p>
+        <h3>📈 点数推移</h3>
+        <canvas id="trendChart"></canvas>
+      </div>
+    </div>
+
+    <!-- テスト結果追加 -->
+    <div class="add-test-section">
+      <div class="ia-section-head">
+        <h3>➕ 新しいテスト結果を追加</h3>
+        <span class="ia-action-inline">登録すると即時集計されます</span>
+      </div>
+      <form id="test-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="test-name">テスト名</label>
+            <input type="text" id="test-name" placeholder="例: 2025年2学期中間試験" required>
+          </div>
+          <div class="form-group">
+            <label for="test-date">実施日</label>
+            <input type="date" id="test-date" required>
+          </div>
+          <div class="form-group">
+            <label for="test-subject">科目</label>
+            <input type="text" id="test-subject" placeholder="例: 数学、体育" list="subject-suggestions" required>
+            <datalist id="subject-suggestions">
+              <option value="数学">
+              <option value="英語">
+              <option value="国語">
+              <option value="理科">
+              <option value="社会">
+              <option value="体育">
+              <option value="音楽">
+              <option value="美術">
+              <option value="技術・家庭">
+              <option value="情報">
+            </datalist>
+          </div>
+          <div class="form-group">
+            <label for="test-score">点数</label>
+            <input type="number" id="test-score" placeholder="点数" min="0" max="100" required>
+          </div>
+        </div>
+        <button type="submit" class="add-btn">追加</button>
+      </form>
+    </div>
+
+    <!-- テスト結果一覧 -->
+    <div class="test-list-section">
+      <div class="ia-section-head">
+        <h3>📋 テスト結果一覧</h3>
+        <p class="ia-section-note">科目フィルターとテスト名検索を組み合わせ可能</p>
+      </div>
+      <div class="filter-controls">
+        <div class="filter-buttons" id="filter-buttons">
+          <button class="filter-btn active" data-subject="all">すべて</button>
+          <!-- 科目は動的に生成 -->
+        </div>
+        <div class="search-box">
+          <input type="text" id="search-test" placeholder="🔍 テスト名で検索...">
+        </div>
+      </div>
+      <div id="test-list">
+        <!-- JavaScriptで動的生成 -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 STARS All Rights Reserved.</p>
+  </footer>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="test_results.js"></script>
+</body>
+</html>

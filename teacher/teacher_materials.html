@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教材管理 - 教師用システム</title>
+    <link rel="stylesheet" href="../ui-foundation.css">
+    <link rel="stylesheet" href="../ui-polish.css">
+    <link rel="stylesheet" href="teacher_materials.css">
+    <link rel="stylesheet" href="../ui-unified.css">
+    <link rel="stylesheet" href="../ui-information.css">
+</head>
+<body class="teacher-materials-page">
+    <header>
+        <div class="header-content">
+            <h1>教材管理システム</h1>
+            <nav>
+                <a href="teacher_dashboard.html">ダッシュボード</a>
+                <a href="teacher_materials.html" class="active">教材管理</a>
+                <a href="teacher_login.html" class="logout-btn">ログアウト</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- アクションバー -->
+        <div class="action-bar">
+            <div>
+                <h2>教材一覧</h2>
+                <p class="ia-muted">公開中・非公開を含む全教材の編集/削除が可能です。</p>
+            </div>
+            <button class="btn-primary" onclick="openUploadModal()">
+                ➕ 新しい教材をアップロード
+            </button>
+        </div>
+
+        <!-- 統計情報 -->
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div class="stat-content">
+                    <h3 id="totalMaterials">0</h3>
+                    <p>総教材数</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📤</div>
+                <div class="stat-content">
+                    <h3 id="thisMonthUploads">0</h3>
+                    <p>今月のアップロード</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⬇️</div>
+                <div class="stat-content">
+                    <h3 id="totalDownloads">0</h3>
+                    <p>総ダウンロード数</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-content">
+                    <h3 id="activeStudents">0</h3>
+                    <p>アクティブな学生</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- フィルターセクション -->
+        <div class="filter-section">
+            <div class="ia-section-head">
+                <h3>検索とフィルター</h3>
+                <span class="ia-action-inline">科目・タイプ・状態で絞り込み</span>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="教材を検索...">
+                <button id="searchBtn">🔍</button>
+            </div>
+            
+            <div class="filter-controls">
+                <select id="subjectFilter">
+                    <option value="">全ての科目</option>
+                    <option value="数学">数学</option>
+                    <option value="英語">英語</option>
+                    <option value="国語">国語</option>
+                    <option value="理科">理科</option>
+                    <option value="社会">社会</option>
+                    <option value="情報">情報</option>
+                </select>
+
+                <select id="typeFilter">
+                    <option value="">全てのタイプ</option>
+                    <option value="講義資料">講義資料</option>
+                    <option value="演習問題">演習問題</option>
+                    <option value="解答例">解答例</option>
+                    <option value="参考資料">参考資料</option>
+                    <option value="動画">動画</option>
+                </select>
+
+                <select id="statusFilter">
+                    <option value="">全てのステータス</option>
+                    <option value="公開中">公開中</option>
+                    <option value="非公開">非公開</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 教材テーブル -->
+        <div class="materials-section">
+            <div class="table-container">
+                <table class="materials-table">
+                    <thead>
+                        <tr>
+                            <th>教材名</th>
+                            <th>科目</th>
+                            <th>タイプ</th>
+                            <th>アップロード日</th>
+                            <th>ファイルサイズ</th>
+                            <th>ダウンロード数</th>
+                            <th>ステータス</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="materialsTableBody">
+                        <!-- データはJavaScriptで動的に生成 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 教材がない場合のメッセージ -->
+        <div id="noMaterials" class="no-materials" style="display: none;">
+            <div class="no-materials-icon">📭</div>
+            <h3>教材が見つかりません</h3>
+            <p>新しい教材をアップロードするか、検索条件を変更してください</p>
+        </div>
+    </main>
+
+    <!-- アップロードモーダル -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>新しい教材をアップロード</h2>
+                <button class="close-btn" onclick="closeUploadModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="uploadForm">
+                    <div class="form-group">
+                        <label for="materialTitle">教材名 *</label>
+                        <input type="text" id="materialTitle" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="materialSubject">科目 *</label>
+                        <select id="materialSubject" required>
+                            <option value="">選択してください</option>
+                            <option value="数学">数学</option>
+                            <option value="英語">英語</option>
+                            <option value="国語">国語</option>
+                            <option value="理科">理科</option>
+                            <option value="社会">社会</option>
+                            <option value="情報">情報</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="materialType">タイプ *</label>
+                        <select id="materialType" required>
+                            <option value="">選択してください</option>
+                            <option value="講義資料">講義資料</option>
+                            <option value="演習問題">演習問題</option>
+                            <option value="解答例">解答例</option>
+                            <option value="参考資料">参考資料</option>
+                            <option value="動画">動画</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="materialDescription">説明</label>
+                        <textarea id="materialDescription" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="materialFile">ファイル *</label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="materialFile" required accept=".pdf,.doc,.docx,.ppt,.pptx,.mp4,.zip">
+                            <label for="materialFile" class="file-input-label">
+                                <span id="fileNameDisplay">ファイルを選択</span>
+                                <span class="file-input-button">参照</span>
+                            </label>
+                        </div>
+                        <small>対応形式: PDF, Word, PowerPoint, MP4, ZIP</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="materialPublic" checked>
+                            <span>すぐに公開する</span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeUploadModal()">キャンセル</button>
+                <button class="btn-primary" onclick="uploadMaterial()">アップロード</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 編集モーダル -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>教材を編集</h2>
+                <button class="close-btn" onclick="closeEditModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm">
+                    <input type="hidden" id="editMaterialId">
+                    
+                    <div class="form-group">
+                        <label for="editTitle">教材名 *</label>
+                        <input type="text" id="editTitle" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editSubject">科目 *</label>
+                        <select id="editSubject" required>
+                            <option value="数学">数学</option>
+                            <option value="英語">英語</option>
+                            <option value="国語">国語</option>
+                            <option value="理科">理科</option>
+                            <option value="社会">社会</option>
+                            <option value="情報">情報</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editType">タイプ *</label>
+                        <select id="editType" required>
+                            <option value="講義資料">講義資料</option>
+                            <option value="演習問題">演習問題</option>
+                            <option value="解答例">解答例</option>
+                            <option value="参考資料">参考資料</option>
+                            <option value="動画">動画</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editDescription">説明</label>
+                        <textarea id="editDescription" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editStatus">ステータス *</label>
+                        <select id="editStatus" required>
+                            <option value="公開中">公開中</option>
+                            <option value="非公開">非公開</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeEditModal()">キャンセル</button>
+                <button class="btn-primary" onclick="saveEdit()">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 削除確認モーダル -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h2>教材を削除</h2>
+                <button class="close-btn" onclick="closeDeleteModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>本当にこの教材を削除しますか？</p>
+                <p><strong id="deleteTitle"></strong></p>
+                <p style="color: #ff6b6b; margin-top: 1rem;">この操作は取り消せません。</p>
+                <input type="hidden" id="deleteMaterialId">
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeDeleteModal()">キャンセル</button>
+                <button class="btn-danger" onclick="confirmDelete()">削除</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="teacher_materials.js"></script>
+</body>
+</html>

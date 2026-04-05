@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>メンバー | STARS</title>
+  <link rel="stylesheet" href="../ui-foundation.css">
+  <link rel="stylesheet" href="../ui-polish.css">
+  <link rel="stylesheet" href="members.css">
+  <link rel="stylesheet" href="../ui-unified.css">
+</head>
+<body class="student-members-page">
+  <div class="stars-bg" aria-hidden="true"></div>
+
+  <header>
+    <div class="header-left">
+      <h1><a href="../index.html" class="brand-link">✨ STARS</a></h1>
+    </div>
+    <nav class="header-nav" aria-label="生徒ページナビゲーション">
+      <a href="dashboard_student.html" class="nav-link">📊 ダッシュボード</a>
+      <a href="calendar.html" class="nav-link">📆 カレンダー</a>
+      <a href="test_results.html" class="nav-link">📈 テスト結果</a>
+      <a href="learning_management.html" class="nav-link">⏱️ 学習管理</a>
+      <a href="learning_history.html" class="nav-link">📋 学習履歴</a>
+      <a href="materials.html" class="nav-link">📚 教材</a>
+      <a href="ranking.html" class="nav-link">🏆 ランキング</a>
+      <a href="members.html" class="nav-link active">👥 メンバー</a>
+    </nav>
+    <div class="header-right">
+      <a href="dashboard_student.html" class="login-btn">ダッシュボードへ</a>
+    </div>
+  </header>
+
+  <main class="members-main">
+    <div class="members-hero">
+      <h2>👥 メンバー</h2>
+      <p class="members-subtitle">一緒に学ぶ仲間たちを確認しよう</p>
+    </div>
+
+    <!-- 検索・フィルターバー -->
+    <div class="members-controls">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="memberSearch" placeholder="名前で検索..." autocomplete="off">
+      </div>
+      <div class="filter-wrap">
+        <button class="grade-btn active" data-grade="all">全員</button>
+        <button class="grade-btn" data-grade="中1">中1</button>
+        <button class="grade-btn" data-grade="中2">中2</button>
+        <button class="grade-btn" data-grade="中3">中3</button>
+        <button class="grade-btn" data-grade="高1">高1</button>
+        <button class="grade-btn" data-grade="高2">高2</button>
+        <button class="grade-btn" data-grade="高3">高3</button>
+        <button class="grade-btn" data-grade="浪人">浪人</button>
+        <button class="grade-btn grade-btn-teacher" data-grade="講師">講師</button>
+      </div>
+      <div class="sort-wrap">
+        <select id="memberSort">
+          <option value="grade">学年順</option>
+          <option value="rank">ランキング順</option>
+          <option value="birthday">誕生日順</option>
+          <option value="name">名前順</option>
+          <option value="hours">学習時間順</option>
+          <option value="streak">連続日数順</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 統計バー -->
+    <div class="members-stats-bar">
+      <div class="stat-pill">
+        <span class="stat-pill-label">総メンバー数</span>
+        <span class="stat-pill-value" id="total-count">－</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-pill-label">今月学習者数</span>
+        <span class="stat-pill-value" id="active-count">－</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-pill-label">平均学習時間</span>
+        <span class="stat-pill-value" id="avg-hours">－</span>
+      </div>
+    </div>
+
+    <!-- メンバーグリッド -->
+    <div class="members-grid" id="members-grid">
+      <!-- JavaScriptで動的生成 -->
+    </div>
+
+    <!-- 空状態 -->
+    <div class="empty-state" id="empty-state" hidden>
+      <div class="empty-icon">🔭</div>
+      <p>該当するメンバーが見つかりません</p>
+    </div>
+  </main>
+
+  <!-- プロフィールモーダル -->
+  <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-name" hidden>
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close" aria-label="閉じる">✕</button>
+      <div class="modal-avatar" id="modal-avatar"></div>
+      <h3 class="modal-name" id="modal-name"></h3>
+      <p class="modal-grade" id="modal-grade"></p>
+      <div class="modal-info-row modal-birthday-row">
+        <span class="modal-info-item">🎂 <span id="modal-birthday"></span></span>
+      </div>
+      <div class="modal-info-row" id="modal-info-row">
+        <span class="modal-info-item">🏫 <span id="modal-classinfo"></span></span>
+        <span class="modal-info-item">⚽ <span id="modal-club"></span></span>
+      </div>
+
+      <div class="modal-subjects" id="modal-subjects-wrap">
+        <h4 id="modal-subjects-label">得意科目</h4>
+        <div class="subject-tags" id="modal-subjects"></div>
+      </div>
+      <div class="modal-subjects" id="modal-favorite-wrap" hidden>
+        <h4>好きな科目</h4>
+        <div class="subject-tags" id="modal-favorite-subjects"></div>
+      </div>
+      <p class="modal-message" id="modal-message"></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 STARS All Rights Reserved.</p>
+  </footer>
+
+  <script src="members.js"></script>
+</body>
+</html>

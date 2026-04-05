@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>学習管理 | STARS</title>
+  <link rel="stylesheet" href="../ui-foundation.css" />
+  <link rel="stylesheet" href="../ui-polish.css" />
+  <link rel="stylesheet" href="learning_management.css" />
+  <link rel="stylesheet" href="../ui-unified.css" />
+  <link rel="stylesheet" href="../ui-information.css" />
+</head>
+<body class="student-management-page">
+  <header>
+    <div class="header-left">
+      <h1><a href="../index.html" class="brand-link">✨ STARS</a></h1>
+    </div>
+    <nav class="header-nav" aria-label="生徒ページナビゲーション">
+      <a href="dashboard_student.html" class="nav-link">📊 ダッシュボード</a>
+      <a href="calendar.html" class="nav-link">📆 カレンダー</a>
+      <a href="test_results.html" class="nav-link">📈 テスト結果</a>
+      <a href="learning_management.html" class="nav-link active">⏱️ 学習管理</a>
+      <a href="learning_history.html" class="nav-link">📋 学習履歴</a>
+      <a href="materials.html" class="nav-link">📚 教材</a>
+      <a href="ranking.html" class="nav-link">🏆 ランキング</a>
+      <a href="members.html" class="nav-link">👥 メンバー</a>
+    </nav>
+    <div class="header-right">
+      <a href="dashboard_student.html" class="login-btn">ダッシュボードへ</a>
+    </div>
+  </header>
+
+  <div class="header-status-row">
+    <span class="submission-status" id="submission-status"></span>
+  </div>
+
+  <main class="ia-stack">
+    <section class="ia-hero">
+      <div>
+        <h2 class="ia-hero-title">週間入力の流れ</h2>
+        <p class="ia-hero-copy">1. 期間と期限を確認 → 2. 目標を設定 → 3. 実績を提出、の順で入力すると迷わず進められます。</p>
+      </div>
+      <div class="ia-kpi-row">
+        <div class="ia-kpi">
+          <span class="ia-kpi-label">Step 1</span>
+          <span class="ia-kpi-value">期限確認</span>
+        </div>
+        <div class="ia-kpi">
+          <span class="ia-kpi-label">Step 2</span>
+          <span class="ia-kpi-value">目標設定</span>
+        </div>
+        <div class="ia-kpi">
+          <span class="ia-kpi-label">Step 3</span>
+          <span class="ia-kpi-value">学習提出</span>
+        </div>
+        <div class="ia-kpi">
+          <span class="ia-kpi-label">Step 4</span>
+          <span class="ia-kpi-value">履歴確認</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-section">
+      <div class="ia-section-head">
+        <h2>週の基準情報</h2>
+        <p class="ia-section-note">提出対象週と目標対象週を先に確認してから入力</p>
+      </div>
+      <div class="info-card">
+        <h3>📅 提出対象週</h3>
+        <p class="date-range"><strong id="week-range-label"></strong></p>
+        <p class="deadline">提出期限: <strong id="deadline-label" style="color: #ff6384;"></strong></p>
+        <p class="remaining-time" id="remaining-time"></p>
+      </div>
+      <div class="info-card">
+        <h3>👤 ユーザー情報</h3>
+        <p class="user-info">ユーザー: <strong id="current-user"></strong></p>
+        <p class="last-submit" id="last-submit-time"></p>
+      </div>
+      <div class="info-card">
+        <h3>🧭 週の区分</h3>
+        <p class="week-axis-item">提出対象週: <strong id="submit-target-week"></strong></p>
+        <p class="week-axis-item">目標対象週: <strong id="goal-target-week"></strong></p>
+      </div>
+    </section>
+
+    <!-- 今週の目標設定セクション（先週のデータ提出後に表示） -->
+    <section class="goal-section" id="current-week-goal-section" style="display: none;">
+      <div class="goal-header">
+        <h2>🎯 目標対象週の学習目標</h2>
+        <p class="goal-notice" id="goal-notice-text">✅ 提出対象週の状況を確認したうえで、目標対象週の目標を設定できます</p>
+      </div>
+      
+      <div class="goal-content">
+        <!-- 目標入力フォーム -->
+        <div class="goal-form">
+          <h3>📝 科目別目標（分単位）</h3>
+          <table class="goal-table">
+            <thead>
+              <tr><th>教科</th><th>目標時間（分）</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>国語</td><td><input type="number" id="goal-国語" min="0" max="1000" value="0" /></td></tr>
+              <tr><td>数学</td><td><input type="number" id="goal-数学" min="0" max="1000" value="0" /></td></tr>
+              <tr><td>英語</td><td><input type="number" id="goal-英語" min="0" max="1000" value="0" /></td></tr>
+              <tr><td>理科</td><td><input type="number" id="goal-理科" min="0" max="1000" value="0" /></td></tr>
+              <tr><td>社会</td><td><input type="number" id="goal-社会" min="0" max="1000" value="0" /></td></tr>
+              <tr><td>課題</td><td><input type="number" id="goal-課題" min="0" max="1000" value="0" /></td></tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td><strong>合計</strong></td>
+                <td><strong id="goal-total">0分</strong></td>
+              </tr>
+            </tfoot>
+          </table>
+          <button id="set-goal-btn" class="set-goal-btn">✅ 目標を設定</button>
+        </div>
+        
+        <!-- 目標達成度表示 -->
+        <div class="goal-display">
+          <h3>📊 現在の達成度</h3>
+          <div class="goal-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <p class="progress-text" id="progress-text">目標未設定</p>
+          </div>
+          <div class="goal-details" id="goal-details">
+            <p class="no-goal-message">目標を設定すると、進捗が表示されます</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <div class="ia-section-head">
+        <h2>📝 提出対象週の学習時間を提出</h2>
+        <span class="ia-action-inline">提出後は自動保存されます</span>
+      </div>
+      <div class="submission-hints">
+        <p class="instruction">※ 各教科の学習時間を<strong>分単位</strong>で入力してください（例: 1時間30分 → 90分）</p>
+        <ul class="hint-list" aria-label="提出時の確認事項">
+          <li class="hint-item hint-success">💾 提出すると、自動的にサーバーへ保存されます</li>
+          <li class="hint-item hint-info">📁 保存先: management_dataFile/{ユーザー名}_study_data.json</li>
+          <li class="hint-item hint-warn">⚠️ 同じ週を再提出すると、その週のデータが最新版に更新されます</li>
+        </ul>
+      </div>
+      <form id="weekly-total-form">
+        <table>
+          <thead>
+            <tr><th>教科</th><th>合計時間（分）</th></tr>
+          </thead>
+          <tbody id="subject-inputs">
+            <tr><td>国語</td><td><input type="number" name="国語" min="0" max="1000" value="0" /></td></tr>
+            <tr><td>数学</td><td><input type="number" name="数学" min="0" max="1000" value="0" /></td></tr>
+            <tr><td>英語</td><td><input type="number" name="英語" min="0" max="1000" value="0" /></td></tr>
+            <tr><td>理科</td><td><input type="number" name="理科" min="0" max="1000" value="0" /></td></tr>
+            <tr><td>社会</td><td><input type="number" name="社会" min="0" max="1000" value="0" /></td></tr>
+            <tr><td>課題</td><td><input type="number" name="課題" min="0" max="1000" value="0" /></td></tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td><strong>合計</strong></td>
+              <td><strong id="total-minutes">0分 (0時間)</strong></td>
+            </tr>
+          </tfoot>
+        </table>
+        <div class="button-group">
+          <button type="button" id="save-btn" class="save-button">💾 提出する</button>
+          <button type="button" id="clear-btn" class="clear-button">🗑️ クリア</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="links-section">
+      <p class="ia-muted">提出後にダッシュボードで可視化、履歴画面で推移を確認できます。</p>
+      <a href="dashboard_student.html" class="link-button primary-link">📊 ダッシュボードでグラフを確認</a>
+      <a href="learning_history.html" class="link-button">📋 学習履歴の詳細を見る</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 STARS</p>
+  </footer>
+
+  <script src="learning_management.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>授業資料 - 学習管理システム</title>
+    <link rel="stylesheet" href="../ui-foundation.css">
+    <link rel="stylesheet" href="../ui-polish.css">
+    <link rel="stylesheet" href="materials.css">
+    <link rel="stylesheet" href="../ui-unified.css">
+    <link rel="stylesheet" href="../ui-information.css">
+</head>
+<body class="student-materials-page">
+    <header>
+        <div class="header-left">
+            <h1><a href="../index.html" class="brand-link">✨ STARS</a></h1>
+        </div>
+        <nav class="header-nav" aria-label="生徒ページナビゲーション">
+            <a href="dashboard_student.html" class="nav-link">📊 ダッシュボード</a>
+            <a href="calendar.html" class="nav-link">📆 カレンダー</a>
+            <a href="test_results.html" class="nav-link">📈 テスト結果</a>
+            <a href="learning_management.html" class="nav-link">⏱️ 学習管理</a>
+            <a href="learning_history.html" class="nav-link">📋 学習履歴</a>
+            <a href="materials.html" class="nav-link active">📚 教材</a>
+            <a href="ranking.html" class="nav-link">🏆 ランキング</a>
+            <a href="members.html" class="nav-link">👥 メンバー</a>
+        </nav>
+        <div class="header-right">
+            <a href="dashboard_student.html" class="login-btn">ダッシュボードへ</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 検索・フィルターセクション -->
+        <div class="filter-section">
+            <div class="ia-section-head">
+                <h3>検索とフィルター</h3>
+                <p class="ia-section-note">科目・タイプ・並び順を組み合わせて表示</p>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="資料を検索...">
+                <button id="searchBtn">🔍</button>
+            </div>
+            
+            <div class="filter-controls">
+                <select id="typeFilter">
+                    <option value="">全てのタイプ</option>
+                    <option value="問題集">問題集</option>
+                    <option value="解答・解説">解答・解説</option>
+                    <option value="講義資料">講義資料</option>
+                    <option value="演習問題">演習問題</option>
+                    <option value="参考資料">参考資料</option>
+                    <option value="動画">動画</option>
+                </select>
+
+                <select id="sortBy">
+                    <option value="newest">新しい順</option>
+                    <option value="oldest">古い順</option>
+                    <option value="name">名前順</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 統計情報 -->
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div class="stat-content">
+                    <h3 id="totalMaterials">0</h3>
+                    <p>総資料数</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👁️</div>
+                <div class="stat-content">
+                    <h3 id="downloadedMaterials">0</h3>
+                    <p>閲覧済み</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🆕</div>
+                <div class="stat-content">
+                    <h3 id="newMaterials">0</h3>
+                    <p>今週の新着</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 資料一覧 -->
+        <div class="materials-section">
+            <div class="ia-section-head">
+                <h2>資料一覧</h2>
+                <span class="ia-action-inline">情報確認後に新しいタブで開けます</span>
+            </div>
+            <div id="breadcrumb" class="breadcrumb-nav"></div>
+            <div id="materialsGrid" class="materials-grid">
+                <!-- 資料カードがJavaScriptで動的に生成されます -->
+            </div>
+        </div>
+
+        <!-- 資料がない場合のメッセージ -->
+        <div id="noMaterials" class="no-materials" style="display: none;">
+            <div class="no-materials-icon">📭</div>
+            <h3>資料が見つかりません</h3>
+            <p>検索条件を変更してもう一度お試しください</p>
+        </div>
+    </main>
+
+    <!-- プレビューモーダル -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="previewTitle">資料情報</h2>
+                <button class="close-btn" onclick="closePreview()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="previewContent"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closePreview()">閉じる</button>
+                <button class="btn-secondary" id="openInNewTabFromPreview">開く</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="materials_data.js"></script>
+    <script src="materials.js"></script>
+</body>
+</html>

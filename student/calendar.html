@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学習カレンダー | STARS</title>
+  <link rel="stylesheet" href="../ui-foundation.css">
+  <link rel="stylesheet" href="../ui-polish.css">
+  <link rel="stylesheet" href="calendar.css">
+  <link rel="stylesheet" href="../ui-unified.css">
+</head>
+<body class="student-calendar-page">
+  <div class="stars-bg"></div>
+
+  <header>
+    <div class="header-left">
+      <h1><a href="../index.html" class="brand-link">✨ STARS</a></h1>
+    </div>
+    <nav class="header-nav">
+      <a href="dashboard_student.html" class="nav-link">📊 ダッシュボード</a>
+      <a href="calendar.html" class="nav-link active">📆 カレンダー</a>
+      <a href="test_results.html" class="nav-link">📈 テスト結果</a>
+      <a href="learning_management.html" class="nav-link">⏱️ 学習管理</a>
+      <a href="learning_history.html" class="nav-link">📋 学習履歴</a>
+      <a href="materials.html" class="nav-link">📚 教材</a>
+      <a href="ranking.html" class="nav-link">🏆 ランキング</a>
+      <a href="members.html" class="nav-link">👥 メンバー</a>
+    </nav>
+    <div class="header-right">
+      <a href="dashboard_student.html" class="login-btn">ダッシュボードへ</a>
+    </div>
+  </header>
+
+  <main class="calendar-main">
+    <div class="calendar-header-info">
+      <h2>📆 学習カレンダー <span id="user-type-label" class="user-type-badge"></span></h2>
+      <button id="back-btn" class="back-btn">戻る</button>
+    </div>
+    <p class="subtitle">テスト日程・課題期限・イベントを管理</p>
+
+    <!-- カレンダーコントロール -->
+    <div class="calendar-controls">
+      <button id="prev-month" class="control-btn">◀ 前月</button>
+      <h3 id="current-month">2025年1月</h3>
+      <button id="next-month" class="control-btn">次月 ▶</button>
+    </div>
+
+    <!-- カレンダーグリッド -->
+    <div class="calendar-container">
+      <div class="calendar-grid" id="calendar-grid">
+        <!-- JavaScriptで動的生成 -->
+      </div>
+    </div>
+
+    <!-- イベント追加・一覧 -->
+    <div class="event-section">
+      <div class="add-event-card" id="add-event-card" style="display:none;">
+        <h3>📝 イベントを追加</h3>
+        <form id="event-form">
+          <input type="date" id="event-date" required>
+          <select id="event-type" required>
+            <option value="">種類を選択</option>
+            <option value="test">テスト</option>
+            <option value="homework">課題提出</option>
+            <option value="event">その他イベント</option>
+          </select>
+          <input type="text" id="event-title" placeholder="タイトル" required>
+          <button type="submit" class="add-btn">追加</button>
+        </form>
+      </div>
+
+      <div class="event-list-card">
+        <h3>📋 予定一覧</h3>
+        <div id="event-list">
+          <!-- JavaScriptで動的生成 -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 STARS All Rights Reserved.</p>
+  </footer>
+
+  <script src="calendar.js"></script>
+</body>
+</html>

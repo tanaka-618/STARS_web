@@ -1,0 +1,176 @@
+/* Shared polish layer for remaining pages. */
+
+.news-page .news-header,
+.student-calendar-page .calendar-main,
+.student-history-page main,
+.student-management-page main,
+.student-materials-page .container,
+.student-ranking-page .ranking-main,
+.student-test-results-page .test-results-main,
+.teacher-records-page main,
+.teacher-materials-page .container {
+  width: min(1280px, 100% - 24px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.news-page header,
+.student-calendar-page header,
+.student-history-page header,
+.student-management-page header,
+.student-ranking-page header,
+.student-test-results-page header,
+.teacher-records-page header,
+.student-materials-page header,
+.teacher-materials-page header {
+  border-bottom: 1px solid rgba(129, 193, 235, 0.26);
+  background: rgba(9, 24, 40, 0.72);
+}
+
+.news-page .login-btn,
+.student-calendar-page .login-btn,
+.student-ranking-page .login-btn,
+.student-test-results-page .login-btn,
+.student-management-page .back-button,
+.student-calendar-page .control-btn,
+.student-calendar-page .back-btn,
+.student-history-page .back-btn,
+.teacher-records-page .back-btn,
+.teacher-records-page .logout-btn,
+.teacher-materials-page .btn-primary,
+.student-materials-page .btn-primary {
+  border-radius: 11px;
+  border: 1px solid rgba(126, 198, 238, 0.34);
+  box-shadow: none;
+}
+
+.news-page .news-item,
+.student-calendar-page .calendar-container,
+.student-history-page .filter-section,
+.student-history-page .stat-card,
+.student-history-page .chart-card,
+.student-history-page .timeline-card,
+.student-management-page .info-card,
+.student-management-page .goal-section,
+.student-management-page .subject-input-card,
+.student-materials-page .filter-section,
+.student-materials-page .stats-section,
+.student-materials-page .materials-section,
+.student-materials-page .material-card,
+.student-ranking-page .my-rank-card,
+.student-ranking-page .rank-item,
+.student-test-results-page .stat-card,
+.student-test-results-page .chart-card,
+.student-test-results-page .add-test-section,
+.student-test-results-page .test-list-section,
+.teacher-records-page .filter-card,
+.teacher-records-page .summary-card,
+.teacher-records-page .chart-card,
+.teacher-records-page .table-card,
+.teacher-materials-page .stats-section,
+.teacher-materials-page .filter-section,
+.teacher-materials-page .materials-section,
+.teacher-materials-page .material-card {
+  background: rgba(10, 28, 46, 0.72);
+  border: 1px solid rgba(124, 191, 230, 0.24);
+  border-radius: 16px;
+  box-shadow: 0 14px 34px rgba(4, 14, 26, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.news-page .news-item:hover,
+.student-materials-page .material-card:hover,
+.teacher-materials-page .material-card:hover,
+.student-ranking-page .rank-item:hover,
+.student-test-results-page .stat-card:hover,
+.teacher-records-page .summary-card:hover,
+.student-history-page .stat-card:hover {
+  transform: translateY(-3px);
+}
+
+.student-calendar-page .calendar-day,
+.student-calendar-page .event-item,
+.student-management-page input,
+.student-management-page select,
+.student-management-page textarea,
+.student-history-page .filter-btn,
+.student-history-page .period-filter button,
+.student-materials-page .search-box input,
+.student-materials-page .filter-controls select,
+.teacher-materials-page .search-box input,
+.teacher-materials-page .filter-controls select,
+.teacher-records-page select,
+.teacher-records-page input,
+.student-test-results-page #test-form input,
+.student-test-results-page .filter-btn,
+.student-ranking-page .filter-btn {
+  background: rgba(9, 33, 53, 0.8);
+  color: #e7f4ff;
+  border: 1px solid rgba(123, 191, 230, 0.32);
+  border-radius: 10px;
+}
+
+.student-calendar-page .calendar-day.today,
+.student-ranking-page .rank-item.top3,
+.student-management-page .goal-section {
+  border-color: rgba(45, 212, 191, 0.5);
+  box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.22) inset;
+}
+
+.student-calendar-page .calendar-main h2,
+.student-history-page header h1,
+.student-management-page header h1,
+.student-ranking-page .ranking-main h2,
+.student-test-results-page .test-results-main h2,
+.teacher-records-page .header-center h1,
+.student-materials-page header h1,
+.teacher-materials-page header h1,
+.news-page .news-header h2 {
+  color: #e9f8ff;
+  text-shadow: none;
+}
+
+.student-management-page .goal-header h2,
+.student-management-page .set-goal-btn,
+.teacher-materials-page .btn-primary,
+.student-materials-page .btn-primary {
+  background: linear-gradient(135deg, #0ea5e9, #2dd4bf);
+  color: #f8feff;
+  border: none;
+}
+
+.teacher-materials-page,
+.student-materials-page {
+  background:
+    radial-gradient(1000px 520px at -10% -10%, rgba(45, 212, 191, 0.14), transparent 68%),
+    radial-gradient(980px 560px at 100% 0%, rgba(14, 165, 233, 0.15), transparent 66%),
+    linear-gradient(165deg, rgba(8, 16, 29, 0.9), rgba(13, 24, 39, 0.92));
+}
+
+@media (max-width: 860px) {
+  .student-calendar-page .calendar-main,
+  .student-history-page main,
+  .student-management-page main,
+  .student-ranking-page .ranking-main,
+  .student-test-results-page .test-results-main,
+  .teacher-records-page main,
+  .news-page .news-list,
+  .student-materials-page .container,
+  .teacher-materials-page .container {
+    width: min(1280px, 100% - 14px);
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .student-calendar-page .calendar-controls,
+  .student-ranking-page .filter-section,
+  .student-history-page .filter-buttons,
+  .student-test-results-page .form-grid,
+  .teacher-records-page .filter-controls,
+  .student-materials-page .filter-controls,
+  .teacher-materials-page .filter-controls {
+    grid-template-columns: 1fr;
+    display: grid;
+    gap: 10px;
+  }
+}

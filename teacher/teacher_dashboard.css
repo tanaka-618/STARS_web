@@ -1,0 +1,363 @@
+.teacher-dashboard-page {
+  min-height: 100vh;
+}
+
+.stars-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(1000px 580px at -8% -10%, rgba(45, 212, 191, 0.16), transparent 70%),
+    radial-gradient(960px 500px at 100% 0%, rgba(14, 165, 233, 0.16), transparent 66%),
+    linear-gradient(170deg, rgba(6, 16, 28, 0.92), rgba(11, 28, 45, 0.92));
+}
+
+.teacher-header {
+  padding: 16px clamp(16px, 4vw, 44px);
+  border-bottom: 1px solid rgba(117, 189, 230, 0.24);
+  background: rgba(8, 22, 37, 0.72);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.header-title-group h1 {
+  margin: 0;
+  color: #ebf8ff;
+  font-size: clamp(1.2rem, 3.5vw, 2rem);
+}
+
+.header-title-group p {
+  margin: 6px 0 0;
+  color: #a7ccdf;
+  font-size: 0.86rem;
+}
+
+.header-nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.nav-btn,
+.logout-btn {
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #e4f4ff;
+  border: 1px solid rgba(117, 189, 230, 0.4);
+  background: rgba(10, 35, 55, 0.6);
+}
+
+.nav-btn:hover,
+.logout-btn:hover {
+  background: rgba(14, 165, 233, 0.26);
+}
+
+.logout-btn {
+  border-color: rgba(251, 113, 133, 0.42);
+  background: rgba(69, 30, 39, 0.55);
+}
+
+.logout-btn:hover {
+  background: rgba(251, 113, 133, 0.25);
+}
+
+main {
+  width: min(1380px, 100% - 28px);
+  margin: 20px auto;
+}
+
+.panel {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: panel-up 0.5s ease forwards;
+}
+
+.panel:nth-of-type(2) {
+  animation-delay: 0.08s;
+}
+
+.panel:nth-of-type(3) {
+  animation-delay: 0.16s;
+}
+
+.panel:nth-of-type(4) {
+  animation-delay: 0.24s;
+}
+
+@keyframes panel-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.control-section,
+.table-section,
+.chart-section {
+  margin-bottom: 12px;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.kpi-card {
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(9, 34, 55, 0.72);
+  border: 1px solid rgba(117, 189, 230, 0.24);
+  box-shadow: 0 10px 26px rgba(4, 14, 25, 0.24);
+}
+
+.kpi-label {
+  display: block;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: #95bfd7;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.kpi-card strong {
+  display: block;
+  margin-top: 4px;
+  color: #ecf8ff;
+  font-size: 1.15rem;
+}
+
+.control-card,
+.table-card,
+.chart-card {
+  background: rgba(10, 28, 46, 0.72);
+  border: 1px solid rgba(117, 189, 230, 0.24);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 16px 34px rgba(4, 14, 25, 0.32);
+  backdrop-filter: blur(8px);
+}
+
+.control-card {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.export-btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  color: #f6fffb;
+  font-size: 0.86rem;
+  font-weight: 800;
+  cursor: pointer;
+  background: linear-gradient(135deg, #22c55e, #10b981);
+}
+
+.table-card h2,
+.chart-card h2 {
+  margin: 0;
+  color: #eaf8ff;
+  font-size: 1.16rem;
+}
+
+.section-description {
+  color: #a2c6dc;
+  font-size: 0.8rem;
+  margin: 6px 0 10px;
+}
+
+.table-toolbar {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr auto auto;
+  gap: 10px;
+  align-items: end;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(8, 31, 50, 0.62);
+  border: 1px solid rgba(117, 189, 230, 0.2);
+}
+
+.toolbar-field {
+  display: grid;
+  gap: 5px;
+}
+
+.toolbar-field span {
+  font-size: 0.74rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #9fc9df;
+  font-weight: 700;
+}
+
+.toolbar-field input,
+.toolbar-field select {
+  min-height: 36px;
+  border-radius: 9px;
+  border: 1px solid rgba(117, 189, 230, 0.3);
+  background: rgba(8, 28, 45, 0.88);
+  color: #e6f5ff;
+  padding: 0 10px;
+}
+
+.toolbar-field input:focus,
+.toolbar-field select:focus {
+  outline: none;
+  border-color: rgba(117, 189, 230, 0.62);
+  box-shadow: 0 0 0 3px rgba(117, 189, 230, 0.16);
+}
+
+.toolbar-reset {
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 9px;
+  border: 1px solid rgba(117, 189, 230, 0.34);
+  background: rgba(11, 37, 58, 0.8);
+  color: #ddf2ff;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.toolbar-reset:hover {
+  background: rgba(14, 165, 233, 0.25);
+}
+
+.toolbar-count {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #9fd0ea;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border: 1px solid rgba(117, 189, 230, 0.2);
+  border-radius: 11px;
+  background: rgba(8, 28, 45, 0.6);
+}
+
+#dashboard-table,
+#student-summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  min-width: 900px;
+}
+
+#dashboard-table thead,
+#student-summary-table thead {
+  background: rgba(14, 165, 233, 0.16);
+}
+
+#dashboard-table th,
+#student-summary-table th {
+  padding: 10px 8px;
+  text-align: center;
+  color: #d9f0ff;
+  border-bottom: 1px solid rgba(117, 189, 230, 0.25);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+#dashboard-table td,
+#student-summary-table td {
+  padding: 9px 8px;
+  text-align: center;
+  color: #dbedf8;
+  border-bottom: 1px solid rgba(117, 189, 230, 0.12);
+}
+
+#dashboard-table tbody tr:hover,
+#student-summary-table tbody tr:hover {
+  background: rgba(14, 165, 233, 0.12);
+}
+
+#dashboard-table tbody tr:nth-child(even),
+#student-summary-table tbody tr:nth-child(even) {
+  background: rgba(9, 31, 49, 0.32);
+}
+
+#dashboard-table td:first-child,
+#student-summary-table td:first-child {
+  text-align: left;
+  color: #9cd3f1;
+  font-weight: 700;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: rgba(9, 31, 49, 0.92);
+}
+
+#dashboard-table td:last-child,
+#student-summary-table td:last-child {
+  color: #86efac;
+  font-weight: 700;
+}
+
+#subjectChart {
+  margin-top: 10px;
+  max-width: 100%;
+  height: auto !important;
+}
+
+footer {
+  text-align: center;
+  color: #95bbd1;
+  font-size: 0.8rem;
+  margin: 12px 0 20px;
+}
+
+@media (max-width: 860px) {
+  .teacher-header {
+    padding: 12px;
+  }
+
+  .kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  main {
+    width: min(1380px, 100% - 14px);
+  }
+
+  .control-card,
+  .table-card,
+  .chart-card {
+    padding: 12px;
+  }
+
+  .table-toolbar {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .toolbar-reset,
+  .toolbar-count {
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
